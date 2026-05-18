@@ -1,0 +1,16 @@
+[project]
+name = "pcl-tdgcn"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "numpy>=2.0.2",
+    "scikit-learn>=1.6.1",
+    "tensorboard>=2.20.0",
+    "torch",
+]
+
+[[tool.uv.index]]
+url = "https://mirrors.aliyun.com/pypi/simple/"
+default = true

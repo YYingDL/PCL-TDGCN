@@ -15,7 +15,7 @@ import time
 
 # dataset_path = {'seed4': '/home/ubuntu-user/Desktop/seed iv', 'seed3': '/home/ubuntu-user/Desktop/seed', 'deafseed3':'/home/ubuntu-user/Desktop/deaf'}
 # dataset_path = {'seed4': 'G:\Database\seed_iv\eeg_feature_smooth', 'seed3': 'G:\Database\seed', 'deafseed3':'G:\Database\deaf'}
-dataset_path = {'seed4': '/home/user_yy/Dataset/seed_iv', 'seed3': '/home/user_yy/Dataset/seed','deafseed3':'/home/user_yy/Dataset/deafseed'}
+dataset_path = {'seed4': '/home/user_yy/Dataset/seed_iv', 'seed3': '../data/SEED/ExtractedFeatures','deafseed3':'/home/user_yy/Dataset/deafseed'}
 
 
 def norminx(data):
@@ -275,7 +275,16 @@ def get_allmats_name(dataset_name):
         allmats: list (3*15)
     '''
     path = dataset_path[dataset_name]
-    sessions = os.listdir(path)
+    # Only directory is considered since my structure of SEED dataset is
+    # SEED/
+    # ├── ExtractedFeatures
+    # │   ├── 1 (session 1 folder)
+    # │   ├── 2 (session 2 folder)
+    # │   ├── 3 (session 3 folder)
+    # │   ├── label.mat
+    # │   └── readme.txt
+    # └── Preprocessed_EEG
+    sessions = [d for d in os.listdir(path) if os.path.isdir(os.path.join(path, d))]
     sessions.sort()
     allmats = []
     if dataset_name == 'seed4':
