@@ -340,7 +340,7 @@ def train_epoch(model: nn.Module, domain_discriminator: nn.Module,
         global_transfer_loss = dann_loss(
             src_feature + 0.005 * torch.randn_like(src_feature).to(args.device),
             tar_feature + 0.005 * torch.randn_like(tar_feature).to(args.device),
-            src_prob, F.softmax(tar_output_cls, dim=1)
+            src_prob,tar_output_cls)
         )
 
         # Cross-domain and within-domain consistency losses
